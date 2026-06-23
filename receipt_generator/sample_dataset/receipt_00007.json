@@ -1,0 +1,149 @@
+{
+  "store": {
+    "name": "ASDA",
+    "legal_name": "Asda Stores Limited",
+    "branch": "Wolverhampton Store",
+    "address": "9 King Street, Wolverhampton, WV1 3AB",
+    "phone": "0386 540 3079"
+  },
+  "transaction": {
+    "date": "24/12/2025",
+    "time": "11:28",
+    "receipt_number": "2488-499901",
+    "till_number": "09",
+    "cashier": "OMAR"
+  },
+  "items": [
+    {
+      "name": "Washing Up Liquid 500ml",
+      "category": "Household",
+      "quantity": 1,
+      "unit_price": 1.07,
+      "total_price": 1.07,
+      "vat_code": "A"
+    },
+    {
+      "name": "Chopped Tomatoes 400g",
+      "category": "Tins & Packets",
+      "quantity": 1,
+      "unit_price": 0.51,
+      "total_price": 0.51,
+      "vat_code": "0"
+    },
+    {
+      "name": "Beef Burgers 4 Pack",
+      "category": "Meat & Fish",
+      "quantity": 1,
+      "unit_price": 2.52,
+      "total_price": 2.52,
+      "vat_code": "0"
+    },
+    {
+      "name": "Sunflower Oil 1L",
+      "category": "Tins & Packets",
+      "quantity": 3,
+      "unit_price": 1.99,
+      "total_price": 5.97,
+      "vat_code": "0"
+    },
+    {
+      "name": "Chicken Breast Fillets 650g",
+      "category": "Meat & Fish",
+      "quantity": 1,
+      "unit_price": 4.54,
+      "total_price": 4.54,
+      "vat_code": "0"
+    },
+    {
+      "name": "Baked Beans 415g",
+      "category": "Tins & Packets",
+      "quantity": 2,
+      "unit_price": 0.5,
+      "total_price": 1.0,
+      "vat_code": "0"
+    },
+    {
+      "name": "Strawberries 400g",
+      "category": "Fruit & Veg",
+      "quantity": 1,
+      "unit_price": 2.24,
+      "total_price": 2.24,
+      "vat_code": "0"
+    },
+    {
+      "name": "Oven Chips 1.5kg",
+      "category": "Frozen",
+      "quantity": 1,
+      "unit_price": 1.7,
+      "total_price": 1.7,
+      "vat_code": "0"
+    },
+    {
+      "name": "Milk Chocolate Bar 200g",
+      "category": "Snacks",
+      "quantity": 1,
+      "unit_price": 1.66,
+      "total_price": 1.66,
+      "vat_code": "A"
+    },
+    {
+      "name": "Free Range Eggs 6 Pack",
+      "category": "Dairy & Eggs",
+      "quantity": 1,
+      "unit_price": 1.85,
+      "total_price": 1.85,
+      "vat_code": "0"
+    },
+    {
+      "name": "Crumpets 9 Pack",
+      "category": "Bakery",
+      "quantity": 1,
+      "unit_price": 0.96,
+      "total_price": 0.96,
+      "vat_code": "0"
+    },
+    {
+      "name": "Cooked Ham Slices 200g",
+      "category": "Meat & Fish",
+      "quantity": 1,
+      "unit_price": 2.39,
+      "total_price": 2.39,
+      "vat_code": "0"
+    },
+    {
+      "name": "White Sliced Bread 800g",
+      "category": "Bakery",
+      "quantity": 1,
+      "unit_price": 0.95,
+      "total_price": 0.95,
+      "vat_code": "0"
+    }
+  ],
+  "totals": {
+    "item_count": 16,
+    "subtotal": 27.36,
+    "vat_breakdown": [
+      {
+        "code": "0",
+        "label": "Zero Rated",
+        "net_amount": 24.63,
+        "vat_amount": 0.0,
+        "gross_amount": 24.63
+      },
+      {
+        "code": "A",
+        "label": "Standard Rate 20.0%",
+        "net_amount": 2.27,
+        "vat_amount": 0.46,
+        "gross_amount": 2.73
+      }
+    ],
+    "total": 27.36
+  },
+  "payment": {
+    "method": "CARD",
+    "card_type": "MASTERCARD DEBIT",
+    "card_last4": "8928",
+    "amount_authorised": 27.36
+  }
+}

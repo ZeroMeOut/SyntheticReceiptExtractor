@@ -1,0 +1,133 @@
+{
+  "store": {
+    "name": "ASDA",
+    "legal_name": "Asda Stores Limited",
+    "branch": "Wolverhampton Store",
+    "address": "81 Mill Lane, Wolverhampton, WV1 3AB",
+    "phone": "0002 994 2301"
+  },
+  "transaction": {
+    "date": "05/10/2025",
+    "time": "02:34",
+    "receipt_number": "0354-612176",
+    "till_number": "08",
+    "cashier": "SARAH"
+  },
+  "items": [
+    {
+      "name": "Avocados 2 Pack",
+      "category": "Fruit & Veg",
+      "quantity": 2,
+      "unit_price": 1.67,
+      "total_price": 3.34,
+      "vat_code": "0"
+    },
+    {
+      "name": "Pork Sausages 8 Pack",
+      "category": "Meat & Fish",
+      "quantity": 1,
+      "unit_price": 2.3,
+      "total_price": 2.3,
+      "vat_code": "0"
+    },
+    {
+      "name": "Tomato Soup 400g",
+      "category": "Tins & Packets",
+      "quantity": 2,
+      "unit_price": 0.76,
+      "total_price": 1.52,
+      "vat_code": "0"
+    },
+    {
+      "name": "Natural Yogurt 1kg",
+      "category": "Dairy & Eggs",
+      "quantity": 1,
+      "unit_price": 1.33,
+      "total_price": 1.33,
+      "vat_code": "0"
+    },
+    {
+      "name": "Squash Blackcurrant 1L",
+      "category": "Drinks",
+      "quantity": 1,
+      "unit_price": 1.41,
+      "total_price": 1.41,
+      "vat_code": "0"
+    },
+    {
+      "name": "Iceberg Lettuce",
+      "category": "Fruit & Veg",
+      "quantity": 3,
+      "unit_price": 0.57,
+      "total_price": 1.71,
+      "vat_code": "0"
+    },
+    {
+      "name": "Hand Wash 250ml",
+      "category": "Toiletries",
+      "quantity": 1,
+      "unit_price": 1.39,
+      "total_price": 1.39,
+      "vat_code": "A"
+    },
+    {
+      "name": "Strawberries 400g",
+      "category": "Fruit & Veg",
+      "quantity": 1,
+      "unit_price": 2.71,
+      "total_price": 2.71,
+      "vat_code": "0"
+    },
+    {
+      "name": "Dishwasher Tablets 30 Pack",
+      "category": "Household",
+      "quantity": 1,
+      "unit_price": 4.28,
+      "total_price": 4.28,
+      "vat_code": "A"
+    },
+    {
+      "name": "Oven Chips 1.5kg",
+      "category": "Frozen",
+      "quantity": 1,
+      "unit_price": 1.84,
+      "total_price": 1.84,
+      "vat_code": "0"
+    },
+    {
+      "name": "Chocolate Muffins 4 Pack",
+      "category": "Bakery",
+      "quantity": 1,
+      "unit_price": 1.67,
+      "total_price": 1.67,
+      "vat_code": "0"
+    }
+  ],
+  "totals": {
+    "item_count": 15,
+    "subtotal": 23.5,
+    "vat_breakdown": [
+      {
+        "code": "0",
+        "label": "Zero Rated",
+        "net_amount": 17.83,
+        "vat_amount": 0.0,
+        "gross_amount": 17.83
+      },
+      {
+        "code": "A",
+        "label": "Standard Rate 20.0%",
+        "net_amount": 4.72,
+        "vat_amount": 0.95,
+        "gross_amount": 5.67
+      }
+    ],
+    "total": 23.5
+  },
+  "payment": {
+    "method": "CARD",
+    "card_type": "MASTERCARD DEBIT",
+    "card_last4": "5192",
+    "amount_authorised": 23.5
+  }
+}

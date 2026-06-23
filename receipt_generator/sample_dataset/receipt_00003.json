@@ -1,0 +1,197 @@
+{
+  "store": {
+    "name": "ASDA",
+    "legal_name": "Asda Stores Limited",
+    "branch": "Sheffield Catcliffe Store",
+    "address": "181 Park Avenue, Sheffield, S60 5TZ",
+    "phone": "0316 516 6799"
+  },
+  "transaction": {
+    "date": "04/07/2025",
+    "time": "12:51",
+    "receipt_number": "5748-483048",
+    "till_number": "23",
+    "cashier": "JANE"
+  },
+  "items": [
+    {
+      "name": "Vine Tomatoes 400g",
+      "category": "Fruit & Veg",
+      "quantity": 1,
+      "unit_price": 1.25,
+      "total_price": 1.25,
+      "vat_code": "0"
+    },
+    {
+      "name": "Tortilla Wraps 8 Pack",
+      "category": "Bakery",
+      "quantity": 1,
+      "unit_price": 1.03,
+      "total_price": 1.03,
+      "vat_code": "0"
+    },
+    {
+      "name": "Whole Milk 2 Pints",
+      "category": "Dairy & Eggs",
+      "quantity": 1,
+      "unit_price": 1.49,
+      "total_price": 1.49,
+      "vat_code": "0"
+    },
+    {
+      "name": "White Sliced Bread 800g",
+      "category": "Bakery",
+      "quantity": 1,
+      "unit_price": 0.96,
+      "total_price": 0.96,
+      "vat_code": "0"
+    },
+    {
+      "name": "Margherita Pizza",
+      "category": "Frozen",
+      "quantity": 1,
+      "unit_price": 1.85,
+      "total_price": 1.85,
+      "vat_code": "0"
+    },
+    {
+      "name": "Cola 2L Bottle",
+      "category": "Drinks",
+      "quantity": 1,
+      "unit_price": 1.71,
+      "total_price": 1.71,
+      "vat_code": "0"
+    },
+    {
+      "name": "Strawberries 400g",
+      "category": "Fruit & Veg",
+      "quantity": 3,
+      "unit_price": 2.82,
+      "total_price": 8.46,
+      "vat_code": "0"
+    },
+    {
+      "name": "Avocados 2 Pack",
+      "category": "Fruit & Veg",
+      "quantity": 1,
+      "unit_price": 1.94,
+      "total_price": 1.94,
+      "vat_code": "0"
+    },
+    {
+      "name": "Bagels 5 Pack",
+      "category": "Bakery",
+      "quantity": 1,
+      "unit_price": 0.93,
+      "total_price": 0.93,
+      "vat_code": "0"
+    },
+    {
+      "name": "Scottish Salmon Fillets 2 Pack",
+      "category": "Meat & Fish",
+      "quantity": 1,
+      "unit_price": 4.5,
+      "total_price": 4.5,
+      "vat_code": "0"
+    },
+    {
+      "name": "Vine Tomatoes 400g",
+      "category": "Fruit & Veg",
+      "quantity": 1,
+      "unit_price": 1.27,
+      "total_price": 1.27,
+      "vat_code": "0"
+    },
+    {
+      "name": "Strawberries 400g",
+      "category": "Fruit & Veg",
+      "quantity": 1,
+      "unit_price": 2.99,
+      "total_price": 2.99,
+      "vat_code": "0"
+    },
+    {
+      "name": "Tuna Chunks in Brine 145g",
+      "category": "Tins & Packets",
+      "quantity": 1,
+      "unit_price": 1.11,
+      "total_price": 1.11,
+      "vat_code": "0"
+    },
+    {
+      "name": "Blueberries 150g",
+      "category": "Fruit & Veg",
+      "quantity": 1,
+      "unit_price": 1.89,
+      "total_price": 1.89,
+      "vat_code": "0"
+    },
+    {
+      "name": "Greek Style Yogurt 500g",
+      "category": "Dairy & Eggs",
+      "quantity": 2,
+      "unit_price": 1.33,
+      "total_price": 2.66,
+      "vat_code": "0"
+    },
+    {
+      "name": "Ground Coffee 200g",
+      "category": "Drinks",
+      "quantity": 1,
+      "unit_price": 3.52,
+      "total_price": 3.52,
+      "vat_code": "0"
+    },
+    {
+      "name": "Baked Beans 415g",
+      "category": "Tins & Packets",
+      "quantity": 1,
+      "unit_price": 0.45,
+      "total_price": 0.45,
+      "vat_code": "0"
+    },
+    {
+      "name": "Deodorant Spray 150ml",
+      "category": "Toiletries",
+      "quantity": 3,
+      "unit_price": 2.16,
+      "total_price": 6.48,
+      "vat_code": "A"
+    },
+    {
+      "name": "Single Cream 300ml",
+      "category": "Dairy & Eggs",
+      "quantity": 1,
+      "unit_price": 1.43,
+      "total_price": 1.43,
+      "vat_code": "0"
+    }
+  ],
+  "totals": {
+    "item_count": 24,
+    "subtotal": 45.92,
+    "vat_breakdown": [
+      {
+        "code": "0",
+        "label": "Zero Rated",
+        "net_amount": 39.44,
+        "vat_amount": 0.0,
+        "gross_amount": 39.44
+      },
+      {
+        "code": "A",
+        "label": "Standard Rate 20.0%",
+        "net_amount": 5.4,
+        "vat_amount": 1.08,
+        "gross_amount": 6.48
+      }
+    ],
+    "total": 45.92
+  },
+  "payment": {
+    "method": "CARD",
+    "card_type": "MAESTRO",
+    "card_last4": "7216",
+    "amount_authorised": 45.92
+  }
+}

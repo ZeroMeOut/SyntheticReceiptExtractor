@@ -1,0 +1,205 @@
+{
+  "store": {
+    "name": "ASDA",
+    "legal_name": "Asda Stores Limited",
+    "branch": "Bristol Eastville Store",
+    "address": "218 Church Lane, Bristol, BS5 6TR",
+    "phone": "0028 222 8252"
+  },
+  "transaction": {
+    "date": "07/03/2025",
+    "time": "15:34",
+    "receipt_number": "9116-536806",
+    "till_number": "12",
+    "cashier": "MARK"
+  },
+  "items": [
+    {
+      "name": "Basmati Rice 1kg",
+      "category": "Tins & Packets",
+      "quantity": 1,
+      "unit_price": 2.05,
+      "total_price": 2.05,
+      "vat_code": "0"
+    },
+    {
+      "name": "Tortilla Chips 200g",
+      "category": "Snacks",
+      "quantity": 2,
+      "unit_price": 1.15,
+      "total_price": 2.3,
+      "vat_code": "A"
+    },
+    {
+      "name": "Tortilla Chips 200g",
+      "category": "Snacks",
+      "quantity": 1,
+      "unit_price": 1.33,
+      "total_price": 1.33,
+      "vat_code": "A"
+    },
+    {
+      "name": "Cooked Ham Slices 200g",
+      "category": "Meat & Fish",
+      "quantity": 1,
+      "unit_price": 2.4,
+      "total_price": 2.4,
+      "vat_code": "0"
+    },
+    {
+      "name": "Plain Flour 1.5kg",
+      "category": "Tins & Packets",
+      "quantity": 1,
+      "unit_price": 1.01,
+      "total_price": 1.01,
+      "vat_code": "0"
+    },
+    {
+      "name": "Sweet Peppers 3 Pack",
+      "category": "Fruit & Veg",
+      "quantity": 1,
+      "unit_price": 1.83,
+      "total_price": 1.83,
+      "vat_code": "0"
+    },
+    {
+      "name": "Natural Yogurt 1kg",
+      "category": "Dairy & Eggs",
+      "quantity": 1,
+      "unit_price": 1.63,
+      "total_price": 1.63,
+      "vat_code": "0"
+    },
+    {
+      "name": "Granulated Sugar 1kg",
+      "category": "Tins & Packets",
+      "quantity": 1,
+      "unit_price": 1.19,
+      "total_price": 1.19,
+      "vat_code": "0"
+    },
+    {
+      "name": "Tomato Soup 400g",
+      "category": "Tins & Packets",
+      "quantity": 2,
+      "unit_price": 0.79,
+      "total_price": 1.58,
+      "vat_code": "0"
+    },
+    {
+      "name": "Kitchen Towel 4 Pack",
+      "category": "Household",
+      "quantity": 1,
+      "unit_price": 2.2,
+      "total_price": 2.2,
+      "vat_code": "A"
+    },
+    {
+      "name": "Free Range Eggs 12 Pack",
+      "category": "Dairy & Eggs",
+      "quantity": 1,
+      "unit_price": 2.62,
+      "total_price": 2.62,
+      "vat_code": "0"
+    },
+    {
+      "name": "Blueberries 150g",
+      "category": "Fruit & Veg",
+      "quantity": 1,
+      "unit_price": 2.02,
+      "total_price": 2.02,
+      "vat_code": "0"
+    },
+    {
+      "name": "Orange Juice 1L",
+      "category": "Drinks",
+      "quantity": 1,
+      "unit_price": 1.41,
+      "total_price": 1.41,
+      "vat_code": "0"
+    },
+    {
+      "name": "Washing Up Liquid 500ml",
+      "category": "Household",
+      "quantity": 1,
+      "unit_price": 1.29,
+      "total_price": 1.29,
+      "vat_code": "A"
+    },
+    {
+      "name": "Mild Cheddar 250g",
+      "category": "Dairy & Eggs",
+      "quantity": 1,
+      "unit_price": 2.16,
+      "total_price": 2.16,
+      "vat_code": "0"
+    },
+    {
+      "name": "Granulated Sugar 1kg",
+      "category": "Tins & Packets",
+      "quantity": 1,
+      "unit_price": 1.03,
+      "total_price": 1.03,
+      "vat_code": "0"
+    },
+    {
+      "name": "Crumpets 9 Pack",
+      "category": "Bakery",
+      "quantity": 1,
+      "unit_price": 1.11,
+      "total_price": 1.11,
+      "vat_code": "0"
+    },
+    {
+      "name": "Popcorn Sharing Bag 150g",
+      "category": "Snacks",
+      "quantity": 1,
+      "unit_price": 1.1,
+      "total_price": 1.1,
+      "vat_code": "A"
+    },
+    {
+      "name": "Blueberries 150g",
+      "category": "Fruit & Veg",
+      "quantity": 2,
+      "unit_price": 1.93,
+      "total_price": 3.86,
+      "vat_code": "0"
+    },
+    {
+      "name": "Garlic Bread Twin Pack",
+      "category": "Frozen",
+      "quantity": 1,
+      "unit_price": 1.58,
+      "total_price": 1.58,
+      "vat_code": "0"
+    }
+  ],
+  "totals": {
+    "item_count": 23,
+    "subtotal": 35.7,
+    "vat_breakdown": [
+      {
+        "code": "0",
+        "label": "Zero Rated",
+        "net_amount": 27.48,
+        "vat_amount": 0.0,
+        "gross_amount": 27.48
+      },
+      {
+        "code": "A",
+        "label": "Standard Rate 20.0%",
+        "net_amount": 6.85,
+        "vat_amount": 1.37,
+        "gross_amount": 8.22
+      }
+    ],
+    "total": 35.7
+  },
+  "payment": {
+    "method": "CARD",
+    "card_type": "VISA DEBIT",
+    "card_last4": "6312",
+    "amount_authorised": 35.7
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "store": {
+    "name": "ALDI",
+    "legal_name": "Aldi Stores Limited",
+    "branch": "Aldi Cardiff Bay Store",
+    "address": "176 Manor Way, Cardiff, CF10 4PA",
+    "phone": "0469 008 3712"
+  },
+  "transaction": {
+    "date": "20/11/2025",
+    "time": "15:49",
+    "receipt_number": "9744-057103",
+    "till_number": "16",
+    "cashier": "JOSH"
+  },
+  "items": [
+    {
+      "name": "Mushrooms Chestnut 250g",
+      "category": "Fruit & Veg",
+      "quantity": 1,
+      "unit_price": 1.07,
+      "total_price": 1.07,
+      "vat_code": "0"
+    },
+    {
+      "name": "Frozen Mixed Berries 500g",
+      "category": "Frozen",
+      "quantity": 1,
+      "unit_price": 2.68,
+      "total_price": 2.68,
+      "vat_code": "0"
+    },
+    {
+      "name": "Vanilla Ice Cream 900ml",
+      "category": "Frozen",
+      "quantity": 1,
+      "unit_price": 2.31,
+      "total_price": 2.31,
+      "vat_code": "0"
+    },
+    {
+      "name": "Cat Food Pouches 12 Pack",
+      "category": "Pet",
+      "quantity": 3,
+      "unit_price": 3.21,
+      "total_price": 9.63,
+      "vat_code": "A"
+    },
+    {
+      "name": "Vine Tomatoes 400g",
+      "category": "Fruit & Veg",
+      "quantity": 1,
+      "unit_price": 1.25,
+      "total_price": 1.25,
+      "vat_code": "0"
+    },
+    {
+      "name": "Chicken Thighs 1kg",
+      "category": "Meat & Fish",
+      "quantity": 1,
+      "unit_price": 3.44,
+      "total_price": 3.44,
+      "vat_code": "0"
+    },
+    {
+      "name": "Sparkling Water 1L",
+      "category": "Drinks",
+      "quantity": 1,
+      "unit_price": 0.91,
+      "total_price": 0.91,
+      "vat_code": "0"
+    },
+    {
+      "name": "Natural Yogurt 1kg",
+      "category": "Dairy & Eggs",
+      "quantity": 3,
+      "unit_price": 1.68,
+      "total_price": 5.04,
+      "vat_code": "0"
+    },
+    {
+      "name": "Bananas 5 Pack",
+      "category": "Fruit & Veg",
+      "quantity": 1,
+      "unit_price": 1.09,
+      "total_price": 1.09,
+      "vat_code": "0"
+    },
+    {
+      "name": "Sweet Peppers 3 Pack",
+      "category": "Fruit & Veg",
+      "quantity": 1,
+      "unit_price": 1.65,
+      "total_price": 1.65,
+      "vat_code": "0"
+    },
+    {
+      "name": "Frozen Mixed Berries 500g",
+      "category": "Frozen",
+      "quantity": 1,
+      "unit_price": 2.22,
+      "total_price": 2.22,
+      "vat_code": "0"
+    }
+  ],
+  "totals": {
+    "item_count": 15,
+    "subtotal": 31.29,
+    "vat_breakdown": [
+      {
+        "code": "0",
+        "label": "Zero Rated",
+        "net_amount": 21.66,
+        "vat_amount": 0.0,
+        "gross_amount": 21.66
+      },
+      {
+        "code": "A",
+        "label": "Standard Rate 20.0%",
+        "net_amount": 8.02,
+        "vat_amount": 1.61,
+        "gross_amount": 9.63
+      }
+    ],
+    "total": 31.29
+  },
+  "payment": {
+    "method": "CARD",
+    "card_type": "MASTERCARD DEBIT",
+    "card_last4": "7682",
+    "amount_authorised": 31.29
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "store": {
+    "name": "ALDI",
+    "legal_name": "Aldi Stores Limited",
+    "branch": "Aldi Dundee Store",
+    "address": "104 Park Avenue, Dundee, DD1 4HN",
+    "phone": "0243 571 5221"
+  },
+  "transaction": {
+    "date": "29/09/2025",
+    "time": "18:33",
+    "receipt_number": "5423-574751",
+    "till_number": "04",
+    "cashier": "DAVID"
+  },
+  "items": [
+    {
+      "name": "Mature Cheddar 400g",
+      "category": "Dairy & Eggs",
+      "quantity": 1,
+      "unit_price": 2.7,
+      "total_price": 2.7,
+      "vat_code": "0"
+    },
+    {
+      "name": "Basmati Rice 1kg",
+      "category": "Tins & Packets",
+      "quantity": 1,
+      "unit_price": 1.77,
+      "total_price": 1.77,
+      "vat_code": "0"
+    },
+    {
+      "name": "Garlic Bulb",
+      "category": "Fruit & Veg",
+      "quantity": 3,
+      "unit_price": 0.52,
+      "total_price": 1.56,
+      "vat_code": "0"
+    },
+    {
+      "name": "Dishwasher Tablets 30 Pack",
+      "category": "Household",
+      "quantity": 1,
+      "unit_price": 5.17,
+      "total_price": 5.17,
+      "vat_code": "A"
+    },
+    {
+      "name": "Digestive Biscuits 400g",
+      "category": "Snacks",
+      "quantity": 1,
+      "unit_price": 1.19,
+      "total_price": 1.19,
+      "vat_code": "A"
+    },
+    {
+      "name": "Frozen Mixed Berries 500g",
+      "category": "Frozen",
+      "quantity": 1,
+      "unit_price": 2.44,
+      "total_price": 2.44,
+      "vat_code": "0"
+    },
+    {
+      "name": "Kitchen Towel 4 Pack",
+      "category": "Household",
+      "quantity": 1,
+      "unit_price": 2.72,
+      "total_price": 2.72,
+      "vat_code": "A"
+    },
+    {
+      "name": "Crumpets 9 Pack",
+      "category": "Bakery",
+      "quantity": 1,
+      "unit_price": 1.1,
+      "total_price": 1.1,
+      "vat_code": "0"
+    }
+  ],
+  "totals": {
+    "item_count": 10,
+    "subtotal": 18.65,
+    "vat_breakdown": [
+      {
+        "code": "0",
+        "label": "Zero Rated",
+        "net_amount": 9.57,
+        "vat_amount": 0.0,
+        "gross_amount": 9.57
+      },
+      {
+        "code": "A",
+        "label": "Standard Rate 20.0%",
+        "net_amount": 7.57,
+        "vat_amount": 1.51,
+        "gross_amount": 9.08
+      }
+    ],
+    "total": 18.65
+  },
+  "payment": {
+    "method": "CARD",
+    "card_type": "MASTERCARD DEBIT",
+    "card_last4": "1207",
+    "amount_authorised": 18.65
+  }
+}

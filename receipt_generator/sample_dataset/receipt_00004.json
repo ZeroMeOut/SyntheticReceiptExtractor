@@ -1,0 +1,141 @@
+{
+  "store": {
+    "name": "ALDI",
+    "legal_name": "Aldi Stores Limited",
+    "branch": "Aldi Preston Store",
+    "address": "21 Manor Way, Preston, PR1 8AA",
+    "phone": "0941 231 3666"
+  },
+  "transaction": {
+    "date": "24/05/2026",
+    "time": "19:40",
+    "receipt_number": "6243-034487",
+    "till_number": "08",
+    "cashier": "MARK"
+  },
+  "items": [
+    {
+      "name": "Garlic Bulb",
+      "category": "Fruit & Veg",
+      "quantity": 2,
+      "unit_price": 0.53,
+      "total_price": 1.06,
+      "vat_code": "0"
+    },
+    {
+      "name": "Margarine Spread 500g",
+      "category": "Dairy & Eggs",
+      "quantity": 2,
+      "unit_price": 1.82,
+      "total_price": 3.64,
+      "vat_code": "0"
+    },
+    {
+      "name": "Cat Food Pouches 12 Pack",
+      "category": "Pet",
+      "quantity": 1,
+      "unit_price": 3.5,
+      "total_price": 3.5,
+      "vat_code": "A"
+    },
+    {
+      "name": "Plain Flour 1.5kg",
+      "category": "Tins & Packets",
+      "quantity": 2,
+      "unit_price": 1.12,
+      "total_price": 2.24,
+      "vat_code": "0"
+    },
+    {
+      "name": "Natural Yogurt 1kg",
+      "category": "Dairy & Eggs",
+      "quantity": 1,
+      "unit_price": 1.48,
+      "total_price": 1.48,
+      "vat_code": "0"
+    },
+    {
+      "name": "Cola 2L Bottle",
+      "category": "Drinks",
+      "quantity": 2,
+      "unit_price": 1.91,
+      "total_price": 3.82,
+      "vat_code": "0"
+    },
+    {
+      "name": "Free Range Eggs 12 Pack",
+      "category": "Dairy & Eggs",
+      "quantity": 2,
+      "unit_price": 2.98,
+      "total_price": 5.96,
+      "vat_code": "0"
+    },
+    {
+      "name": "Scottish Salmon Fillets 2 Pack",
+      "category": "Meat & Fish",
+      "quantity": 1,
+      "unit_price": 4.93,
+      "total_price": 4.93,
+      "vat_code": "0"
+    },
+    {
+      "name": "Squash Blackcurrant 1L",
+      "category": "Drinks",
+      "quantity": 1,
+      "unit_price": 1.43,
+      "total_price": 1.43,
+      "vat_code": "0"
+    },
+    {
+      "name": "Sparkling Water 1L",
+      "category": "Drinks",
+      "quantity": 1,
+      "unit_price": 0.7,
+      "total_price": 0.7,
+      "vat_code": "0"
+    },
+    {
+      "name": "Natural Yogurt 1kg",
+      "category": "Dairy & Eggs",
+      "quantity": 1,
+      "unit_price": 1.62,
+      "total_price": 1.62,
+      "vat_code": "0"
+    },
+    {
+      "name": "Tomato Soup 400g",
+      "category": "Tins & Packets",
+      "quantity": 1,
+      "unit_price": 0.65,
+      "total_price": 0.65,
+      "vat_code": "0"
+    }
+  ],
+  "totals": {
+    "item_count": 17,
+    "subtotal": 31.03,
+    "vat_breakdown": [
+      {
+        "code": "0",
+        "label": "Zero Rated",
+        "net_amount": 27.53,
+        "vat_amount": 0.0,
+        "gross_amount": 27.53
+      },
+      {
+        "code": "A",
+        "label": "Standard Rate 20.0%",
+        "net_amount": 2.92,
+        "vat_amount": 0.58,
+        "gross_amount": 3.5
+      }
+    ],
+    "total": 31.03
+  },
+  "payment": {
+    "method": "CARD",
+    "card_type": "MASTERCARD DEBIT",
+    "card_last4": "5624",
+    "amount_authorised": 31.03
+  }
+}

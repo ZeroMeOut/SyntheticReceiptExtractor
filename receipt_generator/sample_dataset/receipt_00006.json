@@ -1,0 +1,117 @@
+{
+  "store": {
+    "name": "ALDI",
+    "legal_name": "Aldi Stores Limited",
+    "branch": "Aldi Nottingham Store",
+    "address": "152 Albert Road, Nottingham, NG7 2UH",
+    "phone": "0422 970 7064"
+  },
+  "transaction": {
+    "date": "14/01/2026",
+    "time": "18:50",
+    "receipt_number": "0791-216068",
+    "till_number": "21",
+    "cashier": "FREYA"
+  },
+  "items": [
+    {
+      "name": "Chopped Tomatoes 400g",
+      "category": "Tins & Packets",
+      "quantity": 2,
+      "unit_price": 0.58,
+      "total_price": 1.16,
+      "vat_code": "0"
+    },
+    {
+      "name": "Hand Wash 250ml",
+      "category": "Toiletries",
+      "quantity": 1,
+      "unit_price": 1.3,
+      "total_price": 1.3,
+      "vat_code": "A"
+    },
+    {
+      "name": "Paracetamol 16 Pack",
+      "category": "Toiletries",
+      "quantity": 1,
+      "unit_price": 0.79,
+      "total_price": 0.79,
+      "vat_code": "A"
+    },
+    {
+      "name": "Salted Crisps 6 Pack",
+      "category": "Snacks",
+      "quantity": 1,
+      "unit_price": 1.86,
+      "total_price": 1.86,
+      "vat_code": "A"
+    },
+    {
+      "name": "Cat Food Pouches 12 Pack",
+      "category": "Pet",
+      "quantity": 1,
+      "unit_price": 3.67,
+      "total_price": 3.67,
+      "vat_code": "A"
+    },
+    {
+      "name": "Washing Up Liquid 500ml",
+      "category": "Household",
+      "quantity": 1,
+      "unit_price": 1.15,
+      "total_price": 1.15,
+      "vat_code": "A"
+    },
+    {
+      "name": "Garlic Baguette",
+      "category": "Bakery",
+      "quantity": 1,
+      "unit_price": 1.19,
+      "total_price": 1.19,
+      "vat_code": "0"
+    },
+    {
+      "name": "Bin Bags 20 Pack",
+      "category": "Household",
+      "quantity": 1,
+      "unit_price": 1.86,
+      "total_price": 1.86,
+      "vat_code": "A"
+    },
+    {
+      "name": "Cat Litter 10L",
+      "category": "Pet",
+      "quantity": 1,
+      "unit_price": 3.63,
+      "total_price": 3.63,
+      "vat_code": "A"
+    }
+  ],
+  "totals": {
+    "item_count": 10,
+    "subtotal": 16.61,
+    "vat_breakdown": [
+      {
+        "code": "0",
+        "label": "Zero Rated",
+        "net_amount": 2.35,
+        "vat_amount": 0.0,
+        "gross_amount": 2.35
+      },
+      {
+        "code": "A",
+        "label": "Standard Rate 20.0%",
+        "net_amount": 11.88,
+        "vat_amount": 2.38,
+        "gross_amount": 14.26
+      }
+    ],
+    "total": 16.61
+  },
+  "payment": {
+    "method": "CARD",
+    "card_type": "MAESTRO",
+    "card_last4": "8805",
+    "amount_authorised": 16.61
+  }
+}
