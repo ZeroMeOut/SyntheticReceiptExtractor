@@ -41,8 +41,7 @@ class ResidualStack(nn.Module):
     def __init__(self, in_dim, h_dim, res_h_dim, n_res_layers):
         super(ResidualStack, self).__init__()
         self.n_res_layers = n_res_layers
-        self.stack = nn.ModuleList(
-            [ResidualLayer(in_dim, h_dim, res_h_dim)]*n_res_layers)
+        self.stack = nn.ModuleList([ResidualLayer(in_dim, h_dim, res_h_dim) for _ in range(n_res_layers)])
 
     def forward(self, x):
         for layer in self.stack:
