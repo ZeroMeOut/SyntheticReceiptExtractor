@@ -1,0 +1,1 @@
+Gotten from [here](https://github.com/MishaLaskin/vqvae). I want train this and then use only the encoder section (or the encoder plus vector_quantization section not sure yet)
