@@ -43,9 +43,8 @@ class VQVAE(nn.Module):
 
         return embedding_loss, x_hat, perplexity
     
-    @torch.no_grad()
     def encode_to_tokens(self, x):
         z_e = self.encoder(x)
         z_e = self.pre_quantization_conv(z_e)
-        _, z_q, _, _, indices = self.vector_quantization(z_e)
-        return z_q, indices  # z_q: (B, embedding_dim, H/4, W/4)
+        embedding_loss, z_q, perplexity, _, indices = self.vector_quantization(z_e)
+        return z_q, indices, embedding_loss
