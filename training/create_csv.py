@@ -1,32 +1,38 @@
 import os
 import json
 import pandas as pd
-from transformers import T5Tokenizer
+from transformers import AutoTokenizer
 
 
 image_path = "../dataset/images"
-json_path = "../dataset/json" 
+json_path = "../dataset/json"
 
-image_path_list = os.listdir(image_path)
-json_path_list = os.listdir(json_path)
+## Honestly this isn't needed because it alsways does the same naming convension butttt just incase.
+image_path_list = sorted(os.listdir(image_path))
+json_path_list = sorted(os.listdir(json_path))
 
-tokenizer = T5Tokenizer.from_pretrained("t5-small")
+tokenizer = AutoTokenizer.from_pretrained("t5-small")
 
-temp = pd.DataFrame(columns=["image_path", "items", 'tokenized_items'])
+## Appending then writing to csv is faster than writing to csv each iteration, so we do that instead.
+rows = []
 
 for i, j in zip(image_path_list, json_path_list):
-    items = ""
-    json_data = json.load(open(os.path.join(json_path, j), 'r'))
+    with open(os.path.join(json_path, j), 'r') as f:
+        json_data = json.load(f)
 
-    for k in json_data["items"]:
-        items += k["name"] + ","
+    items = ",".join(k["name"] for k in json_data["items"]) + "."
 
-    ## Replace the last comma with a period
-    items = items[:-1] + "."
-    
-    tokenized_items = tokenizer(items, padding="max_length", truncation=True, max_length=512, return_tensors="pt")["input_ids"][0].tolist()
-    image = os.path.join(image_path, i)
+    tokenized_items = (
+        tokenizer(items, padding="max_length", truncation=True, max_length=512, return_tensors="pt")
+        ["input_ids"][0]
+        .tolist()
+    )
 
-    temp = pd.concat([temp, pd.DataFrame({"image_path": [image], "items": [items], 'tokenized_items': [tokenized_items]})], ignore_index=True)
+    rows.append({
+        "image_path": os.path.join(image_path, i),
+        "items": items,
+        "tokenized_items": tokenized_items,
+    })
 
+temp = pd.DataFrame(rows, columns=["image_path", "items", "tokenized_items"])
 temp.to_csv("../dataset/dataset.csv", index=False)
