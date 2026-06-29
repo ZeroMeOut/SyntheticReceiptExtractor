@@ -15,7 +15,7 @@ from vqvae_model.vqvae import VQVAE
 def parse_args():
     p = argparse.ArgumentParser(description="Train the VQVAE receipt encoder")
 
-    p.add_argument("--data-dir", type=str, default="../dataset/images")
+    p.add_argument("--data-dir", type=str, default="../../dataset/images")
     p.add_argument("--image-size", type=int, default=256)
     p.add_argument("--batch-size", type=int, default=32)
     p.add_argument("--val-split", type=float, default=0.1)
@@ -28,7 +28,7 @@ def parse_args():
     p.add_argument("--embedding-dim", type=int, default=64)
     p.add_argument("--beta", type=float, default=0.25)
 
-    p.add_argument("--epochs", type=int, default=1000)
+    p.add_argument("--epochs", type=int, default=100)
     p.add_argument("--lr", type=float, default=3e-4)
     p.add_argument("--grad-clip", type=float, default=1.0)
 
