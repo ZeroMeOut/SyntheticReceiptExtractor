@@ -1,0 +1,195 @@
+import os
+import torch
+from torch.optim import AdamW
+from torch.optim.lr_scheduler import CosineAnnealingLR
+from torch.utils.data import DataLoader, random_split
+from torch.utils.tensorboard import SummaryWriter
+
+from vqvaeT5 import VQVAE_T5, load_models, get_device
+from utils import VQVAET5DATASET
+
+
+# ---------------------------------------------------------------------------
+# Config — edit these directly or wire up argparse if you prefer CLI flags
+# ---------------------------------------------------------------------------
+CONFIG = {
+    # Data
+    "csv_dir": "../dataset/dataset.csv",
+    "image_size": 256,
+    "val_split": 0.1,
+    "num_workers": 4,
+    # Training
+    "batch_size": 16,
+    "num_epochs": 50,
+    "seed": 42,
+    # Loss — weight on the VQ-VAE commitment/embedding loss term
+    "embedding_loss_weight": 0.25,
+    # Optimiser — VQ-VAE gets a much lower LR since it's already pretrained
+    "lr_t5": 1e-4,
+    "lr_vqvae": 1e-5,
+    "weight_decay": 1e-2,
+    "grad_clip": 1.0,
+    # Checkpointing
+    "checkpoint_dir": "checkpoints",
+    "checkpoint_every": 5,   # save a periodic snapshot every N epochs
+    # TensorBoard
+    "log_dir": "runs",
+}
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+def make_loaders(cfg: dict, device: torch.device):
+    dataset = VQVAET5DATASET(csv_dir=cfg["csv_dir"], image_size=cfg["image_size"])
+
+    val_size = int(len(dataset) * cfg["val_split"])
+    train_size = len(dataset) - val_size
+    generator = torch.Generator().manual_seed(cfg["seed"])
+    train_dataset, val_dataset = random_split(dataset, [train_size, val_size], generator=generator)
+
+    # pin_memory only helps on CUDA; can cause issues on MPS
+    pin = device.type == "cuda"
+    loader_kwargs = dict(num_workers=cfg["num_workers"], pin_memory=pin)
+
+    train_loader = DataLoader(train_dataset, batch_size=cfg["batch_size"], shuffle=True, **loader_kwargs)
+    val_loader   = DataLoader(val_dataset,   batch_size=cfg["batch_size"], shuffle=False, **loader_kwargs)
+
+    return train_loader, val_loader
+
+
+def make_optimizer(model: VQVAE_T5, cfg: dict) -> AdamW:
+    return AdamW(
+        [
+            {"params": model.vqvae_model.parameters(), "lr": cfg["lr_vqvae"]},
+            {"params": model.t5_model.parameters(),    "lr": cfg["lr_t5"]},
+            {"params": model.image_proj.parameters(),  "lr": cfg["lr_t5"]},
+        ],
+        weight_decay=cfg["weight_decay"],
+    )
+
+
+def run_epoch(model, loader, device, cfg, optimizer=None):
+    """One pass over `loader`. Pass optimizer=None for validation."""
+    is_train = optimizer is not None
+    model.train() if is_train else model.eval()
+
+    total_loss = total_t5 = total_emb = total_perp = 0.0
+
+    ctx = torch.enable_grad() if is_train else torch.no_grad()
+    with ctx:
+        for images, _, tokenized_labels in loader:
+            images           = images.to(device)
+            tokenized_labels = tokenized_labels.to(device)
+
+            embedding_loss, perplexity, t5_output = model(images, labels=tokenized_labels)
+            loss = t5_output.loss + cfg["embedding_loss_weight"] * embedding_loss
+
+            if is_train:
+                optimizer.zero_grad()
+                loss.backward()
+                torch.nn.utils.clip_grad_norm_(model.parameters(), cfg["grad_clip"])
+                optimizer.step()
+
+            total_loss += loss.item()
+            total_t5   += t5_output.loss.item()
+            total_emb  += embedding_loss.item()
+            total_perp += perplexity.item()
+
+    n = len(loader)
+    return {
+        "loss":       total_loss / n,
+        "t5_loss":    total_t5   / n,
+        "emb_loss":   total_emb  / n,
+        "perplexity": total_perp / n,
+    }
+
+
+def log(prefix: str, metrics: dict, epoch: int, num_epochs: int):
+    print(
+        f"Epoch {epoch:>3}/{num_epochs} | {prefix} | "
+        f"loss {metrics['loss']:.4f} | "
+        f"t5 {metrics['t5_loss']:.4f} | "
+        f"emb {metrics['emb_loss']:.4f} | "
+        f"perplexity {metrics['perplexity']:.2f}"
+    )
+
+
+def save_checkpoint(path: str, epoch: int, model, optimizer, scheduler, val_loss: float):
+    torch.save(
+        {
+            "epoch":                epoch,
+            "model_state_dict":     model.state_dict(),
+            "optimizer_state_dict": optimizer.state_dict(),
+            "scheduler_state_dict": scheduler.state_dict(),
+            "val_loss":             val_loss,
+        },
+        path,
+    )
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
+def train(cfg: dict = CONFIG):
+    torch.manual_seed(cfg["seed"])
+    device = get_device()
+    print(f"Using device: {device}")
+
+    train_loader, val_loader = make_loaders(cfg, device)
+    print(f"Train batches: {len(train_loader)} | Val batches: {len(val_loader)}")
+
+    model     = load_models(freeze_vqvae=False).to(device)
+    optimizer = make_optimizer(model, cfg)
+    scheduler = CosineAnnealingLR(optimizer, T_max=cfg["num_epochs"])
+
+    os.makedirs(cfg["checkpoint_dir"], exist_ok=True)
+    best_val_loss = float("inf")
+
+    writer = SummaryWriter(log_dir=cfg["log_dir"])
+    try:
+        for epoch in range(1, cfg["num_epochs"] + 1):
+            train_metrics = run_epoch(model, train_loader, device, cfg, optimizer=optimizer)
+            val_metrics   = run_epoch(model, val_loader,   device, cfg, optimizer=None)
+
+            log("train", train_metrics, epoch, cfg["num_epochs"])
+            log("val  ", val_metrics,   epoch, cfg["num_epochs"])
+
+            # -- TensorBoard --
+            # Group train/val on the same chart by sharing the parent tag
+            for metric in ("loss", "t5_loss", "emb_loss", "perplexity"):
+                tag = metric.replace("_", " ").title().replace(" ", "_")
+                writer.add_scalars(tag, {
+                    "train": train_metrics[metric],
+                    "val":   val_metrics[metric],
+                }, epoch)
+
+            # Log the current LR for each param group
+            writer.add_scalar("LR/vqvae", optimizer.param_groups[0]["lr"], epoch)
+            writer.add_scalar("LR/t5",    optimizer.param_groups[1]["lr"], epoch)
+
+            scheduler.step()
+
+            # Save best checkpoint
+            if val_metrics["loss"] < best_val_loss:
+                best_val_loss = val_metrics["loss"]
+                save_checkpoint(
+                    os.path.join(cfg["checkpoint_dir"], "best.pt"),
+                    epoch, model, optimizer, scheduler, best_val_loss,
+                )
+                print(f"  -> New best saved (val loss {best_val_loss:.4f})")
+
+            # Periodic snapshot
+            if epoch % cfg["checkpoint_every"] == 0:
+                save_checkpoint(
+                    os.path.join(cfg["checkpoint_dir"], f"epoch_{epoch:03d}.pt"),
+                    epoch, model, optimizer, scheduler, val_metrics["loss"],
+                )
+    finally:
+        writer.close()
+
+
+if __name__ == "__main__":
+    train()
