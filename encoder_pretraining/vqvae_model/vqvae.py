@@ -1,7 +1,4 @@
-
-import torch
 import torch.nn as nn
-import numpy as np
 from vqvae_model.encoder import Encoder
 from vqvae_model.quantizer import VectorQuantizer
 from vqvae_model.decoder import Decoder
@@ -47,4 +44,4 @@ class VQVAE(nn.Module):
         z_e = self.encoder(x)
         z_e = self.pre_quantization_conv(z_e)
         embedding_loss, z_q, perplexity, _, indices = self.vector_quantization(z_e)
-        return z_q, indices, embedding_loss
+        return z_q, indices, embedding_loss, perplexity
