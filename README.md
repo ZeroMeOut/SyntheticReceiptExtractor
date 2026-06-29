@@ -3,3 +3,4 @@ Still work in progress. The goal is to create a dount style model (see [here](ht
 
 ## Timeline notes
 - I have trained the vqvae model but the quality is not that great imo, I will try to see what I can do
+- I am running out of memeory while trying to train
