@@ -28,7 +28,7 @@ def parse_args():
     p.add_argument("--embedding-dim", type=int, default=64)
     p.add_argument("--beta", type=float, default=0.25)
 
-    p.add_argument("--epochs", type=int, default=100)
+    p.add_argument("--epochs", type=int, default=500)
     p.add_argument("--lr", type=float, default=3e-4)
     p.add_argument("--grad-clip", type=float, default=1.0)
 
