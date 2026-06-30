@@ -1,9 +1,13 @@
 import os
 import torch
+from torch.amp import GradScaler, autocast
 from torch.optim import AdamW
 from torch.optim.lr_scheduler import CosineAnnealingLR
 from torch.utils.data import DataLoader, random_split
 from torch.utils.tensorboard import SummaryWriter
+
+# Reduces fragmentation on small GPUs — set before any CUDA allocations happen
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 from vqvaeT5 import VQVAE_T5, load_models, get_device
 from utils import VQVAET5DATASET
@@ -19,7 +23,7 @@ CONFIG = {
     "val_split": 0.1,
     "num_workers": 4,
     # Training
-    "batch_size": 16,
+    "batch_size": 4,     
     "num_epochs": 50,
     "seed": 42,
     # Loss — weight on the VQ-VAE commitment/embedding loss term
@@ -29,11 +33,16 @@ CONFIG = {
     "lr_vqvae": 1e-5,
     "weight_decay": 1e-2,
     "grad_clip": 1.0,
+    # Memory
+    "mixed_precision": True,   # fp16 autocast — roughly halves activation memory on CUDA
     # Checkpointing
     "checkpoint_dir": "checkpoints",
     "checkpoint_every": 5,   # save a periodic snapshot every N epochs
     # TensorBoard
     "log_dir": "runs",
+    # Optional callback fired after every checkpoint write (e.g. a Modal
+    # Volume.commit) — no-op by default, harmless to leave None locally.
+    "post_checkpoint_hook": None,
 }
 
 
@@ -70,9 +79,10 @@ def make_optimizer(model: VQVAE_T5, cfg: dict) -> AdamW:
     )
 
 
-def run_epoch(model, loader, device, cfg, optimizer=None):
+def run_epoch(model, loader, device, cfg, optimizer=None, scaler=None):
     """One pass over `loader`. Pass optimizer=None for validation."""
     is_train = optimizer is not None
+    use_amp  = cfg["mixed_precision"] and device.type == "cuda"
     model.train() if is_train else model.eval()
 
     total_loss = total_t5 = total_emb = total_perp = 0.0
@@ -83,14 +93,22 @@ def run_epoch(model, loader, device, cfg, optimizer=None):
             images           = images.to(device)
             tokenized_labels = tokenized_labels.to(device)
 
-            embedding_loss, perplexity, t5_output = model(images, labels=tokenized_labels)
-            loss = t5_output.loss + cfg["embedding_loss_weight"] * embedding_loss
+            with autocast(device_type=device.type, dtype=torch.float16, enabled=use_amp):
+                embedding_loss, perplexity, t5_output = model(images, labels=tokenized_labels)
+                loss = t5_output.loss + cfg["embedding_loss_weight"] * embedding_loss
 
             if is_train:
                 optimizer.zero_grad()
-                loss.backward()
-                torch.nn.utils.clip_grad_norm_(model.parameters(), cfg["grad_clip"])
-                optimizer.step()
+                if scaler is not None:
+                    scaler.scale(loss).backward()
+                    scaler.unscale_(optimizer)
+                    torch.nn.utils.clip_grad_norm_(model.parameters(), cfg["grad_clip"])
+                    scaler.step(optimizer)
+                    scaler.update()
+                else:
+                    loss.backward()
+                    torch.nn.utils.clip_grad_norm_(model.parameters(), cfg["grad_clip"])
+                    optimizer.step()
 
             total_loss += loss.item()
             total_t5   += t5_output.loss.item()
@@ -142,8 +160,18 @@ def train(cfg: dict = CONFIG):
     print(f"Train batches: {len(train_loader)} | Val batches: {len(val_loader)}")
 
     model     = load_models(freeze_vqvae=False).to(device)
+
+    # Gradient checkpointing trades compute for memory — recomputes activations
+    # on the backward pass instead of storing them. Worthwhile on a small GPU.
+    model.t5_model.gradient_checkpointing_enable()
+
     optimizer = make_optimizer(model, cfg)
     scheduler = CosineAnnealingLR(optimizer, T_max=cfg["num_epochs"])
+
+    use_amp = cfg["mixed_precision"] and device.type == "cuda"
+    scaler  = GradScaler(device="cuda") if use_amp else None
+    if use_amp:
+        print("Mixed precision (fp16) enabled")
 
     os.makedirs(cfg["checkpoint_dir"], exist_ok=True)
     best_val_loss = float("inf")
@@ -151,7 +179,7 @@ def train(cfg: dict = CONFIG):
     writer = SummaryWriter(log_dir=cfg["log_dir"])
     try:
         for epoch in range(1, cfg["num_epochs"] + 1):
-            train_metrics = run_epoch(model, train_loader, device, cfg, optimizer=optimizer)
+            train_metrics = run_epoch(model, train_loader, device, cfg, optimizer=optimizer, scaler=scaler)
             val_metrics   = run_epoch(model, val_loader,   device, cfg, optimizer=None)
 
             log("train", train_metrics, epoch, cfg["num_epochs"])
@@ -180,6 +208,8 @@ def train(cfg: dict = CONFIG):
                     epoch, model, optimizer, scheduler, best_val_loss,
                 )
                 print(f"  -> New best saved (val loss {best_val_loss:.4f})")
+                if cfg.get("post_checkpoint_hook"):
+                    cfg["post_checkpoint_hook"]()
 
             # Periodic snapshot
             if epoch % cfg["checkpoint_every"] == 0:
@@ -187,6 +217,8 @@ def train(cfg: dict = CONFIG):
                     os.path.join(cfg["checkpoint_dir"], f"epoch_{epoch:03d}.pt"),
                     epoch, model, optimizer, scheduler, val_metrics["loss"],
                 )
+                if cfg.get("post_checkpoint_hook"):
+                    cfg["post_checkpoint_hook"]()
     finally:
         writer.close()
 
